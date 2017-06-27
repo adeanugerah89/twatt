@@ -45,9 +45,24 @@ var timeline = (req,res) =>{
     });
 }
 
+var twitPost = (req,res)=>{
+  oauth.post(
+    `https://api.twitter.com/1.1/statuses/update.json?status=${req.params.twitPost}`,
+    process.env.USER_TOKEN, //test user token 
+    process.env.USER_SECRET, //test user secret  
+    req.params.twitPost,
+    "txt",
+    function (e, data){ 
+      if (e) console.error(e); 
+      console.log(data);       
+      res.send(data);
+    });
+}
+
 
 
 module.exports ={
   search,
   timeline,
+  twitPost
 }
